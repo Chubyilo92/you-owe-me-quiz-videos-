@@ -1,0 +1,306 @@
+<title>You Owe Me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F4F1F3;--surface:#FFFFFF;--ink:#171316;--muted:#6E6570;--line:#E4DEE2;
+  --pink:#FF4D6D;--pink-soft:#FFE3E9;--pink-ink:#A3143A;
+  --blue:#3A86FF;--blue-soft:#E3EEFF;--blue-ink:#1A4FA8;
+  --yellow:#FFD60A;--chip:#171316;--chip-ink:#FFFFFF;
+  --display:"Poppins",system-ui,sans-serif;--body:"Figtree",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#141114;--surface:#1E1A1E;--ink:#F4EEF2;--muted:#A89DA6;--line:#332C32;
+  --pink-soft:#3A1822;--pink-ink:#FF9AAE;--blue-soft:#172642;--blue-ink:#9DC1FF;--chip:#F4EEF2;--chip-ink:#171316;}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#141114;--surface:#1E1A1E;--ink:#F4EEF2;--muted:#A89DA6;--line:#332C32;
+  --pink-soft:#3A1822;--pink-ink:#FF9AAE;--blue-soft:#172642;--blue-ink:#9DC1FF;--chip:#F4EEF2;--chip-ink:#171316;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(34px,6vw,54px);font-weight:800;letter-spacing:-.02em}
+h1 span{color:var(--pink)}
+h2{font-size:24px;font-weight:800}
+.lede{color:var(--muted);max-width:62ch;margin:10px 0 0}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.daybar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+button,input[type=date]{font:600 15px var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.today{background:var(--chip);color:var(--chip-ink);border-color:var(--chip)}
+.eps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:20px}
+.ep{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:16px;align-content:start}
+.ephead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.num{font:800 15px var(--display)}
+.stake{background:var(--pink-soft);color:var(--pink-ink);font-weight:600;font-size:14px;padding:5px 12px;border-radius:999px}
+.hook{background:var(--chip);color:var(--chip-ink);border-radius:12px;padding:16px 18px;font:700 20px/1.25 var(--display)}
+.hook b{color:var(--yellow);font-weight:800}
+:root[data-theme="dark"] .hook b{color:#B8860B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hook b{color:#B8860B}}
+.rule{font-size:14px;color:var(--muted);margin-top:-6px}
+ol.qs{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.q{display:grid;gap:6px}
+.qt{font-weight:600;display:flex;gap:10px}
+.qn{font:500 13px var(--mono);color:var(--muted);padding-top:2px;min-width:22px}
+.slot{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:32px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-left:32px}
+.opt{font-size:14px;background:var(--bg);border-radius:8px;padding:6px 10px;display:flex;gap:8px}
+.opt i{font:500 13px var(--mono);font-style:normal;color:var(--muted)}
+.opt.d{background:var(--blue-soft);color:var(--blue-ink)}
+.opt.d i{color:var(--blue-ink)}
+.spicy .qt{color:var(--pink-ink)}
+.meta{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:14px;font-size:14px}
+.meta div{display:grid;grid-template-columns:96px 1fr;gap:10px}
+.meta dt{color:var(--muted)}
+.copy{justify-self:start}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.how h3{font-size:16px;margin-bottom:6px}
+.how p{margin:0;font-size:14px;color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tabs button[aria-selected=true]{background:var(--chip);color:var(--chip-ink);border-color:var(--chip)}
+.bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:10px}
+.bq{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.bq strong{display:block;margin-bottom:4px;font-size:15px}
+.bq span{color:var(--muted)}
+.stakes{display:flex;flex-wrap:wrap;gap:8px}
+.stakes span{background:var(--pink-soft);color:var(--pink-ink);border-radius:999px;padding:5px 12px;font-size:14px}
+@media (max-width:480px){.opts{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">CoupleIn · TikTok daily series</div>
+    <h1>You Owe Me<span>.</span></h1>
+    <p class="lede">Two episodes a day. The viewer tags their partner, the partner answers questions about the viewer in the comments, and anyone who scores under 4 out of 5 pays the forfeit. Each date below gets its own set of questions and forfeits.</p>
+    <div class="daybar">
+      <button id="prev" aria-label="Previous day">← Prev</button>
+      <input type="date" id="day" aria-label="Posting date">
+      <button id="next" aria-label="Next day">Next →</button>
+      <button id="jump" class="today">Today</button>
+    </div>
+  </header>
+
+  <section class="eps" id="eps" aria-live="polite"></section>
+
+  <section>
+    <h2>How the swapping works</h2>
+    <div class="how" style="margin-top:14px">
+      <div><h3>5 slots, always the same order</h3><p>Everyday warm-up, food, taste, a CoupleIn question, then a spicy finale about the partner. Every episode starts easy and ends on the question that starts arguments.</p></div>
+      <div><h3>20 questions per slot</h3><p>Each question is used once every 10 days, and it's paired with different questions every cycle. 100 questions give you 20 unique episodes before anything repeats.</p></div>
+      <div><h3>Forfeit changes every episode</h3><p>There are 20 forfeits, shuffled separately from the questions, so the same set of questions never comes back with the same stakes.</p></div>
+      <div><h3>Every episode leads to CoupleIn</h3><p>Question 4 always ties to a CoupleIn feature, and the caption line matches it. The end card and pinned comment say the loser will "forget", so log it in CoupleIn. The bio link goes to the Brownie Points page.</p></div>
+      <div><h3>Retire the duds</h3><p>After a week, check which questions got the fewest comments. Send them to Claude and they'll be replaced from the reserve bank or with new ones.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Question bank</h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="bank" id="bank"></div>
+  </section>
+
+  <section>
+    <h2>Forfeits</h2>
+    <div class="stakes" id="stakes" style="margin-top:14px"></div>
+  </section>
+</div>
+
+<script>
+const SLOTS=[
+{name:"Warm-up",qs:[
+["What do I actually do on my day off?","Lie in till midday","Brunch and a walk","Clean the whole house","Sofa, snacks, phone. Don't speak to me"],
+["First thing I do when I wake up?","Check my phone","Make a coffee","Snooze 5 more times","Complain about being awake"],
+["What time do I actually fall asleep?","Before 11","Around midnight","2am, scrolling","The second a film starts"],
+["How long do I really take to get ready?","10 minutes","30 minutes","An hour","\"5 minutes\" (it's never 5 minutes)"],
+["My ideal Friday night?","Out with friends","Date night","Takeaway and a film","In bed by 9 and proud of it"],
+["How do I get over a bad day?","Food","A nap","Online shopping","Ranting to you for an hour"],
+["Where would you find me on a Sunday?","At the gym","At a Sunday roast","At the shops","Still in bed at 2pm"],
+["How many unread messages do I have right now?","Zero","Under 10","50+","Don't ask"],
+["What's my phone battery usually on?","Always 100%","Around half","Red, always","Dead. Where's the charger?"],
+["My morning drink?","Coffee","Tea","Water, I'm healthy","Energy drink, don't judge"],
+["Where are my keys most of the time?","Coat pocket","Bottom of my bag","Still in the door","You have them"],
+["My go-to excuse to cancel plans?","I'm tired","Something came up","A family thing","I just don't reply"],
+["What am I like when I'm hungry?","Normal","Quiet","Grumpy","A completely different person"],
+["My gym routine?","Every day","A few times a week","I pay for it, that counts","What gym?"],
+["What do I do the second I get home?","Change into comfies","Raid the snacks","Lie on the bed","Tell you about my whole day"],
+["How many alarms do I set?","One","Two","Five","None, I just wake up late"],
+["What do I do in the shower?","Sing","Think about life","Win arguments from 3 years ago","Stay in there for 45 minutes"],
+["My texting style?","Long paragraphs","One word","Voice notes","Leave you on read"],
+["When I'm bored, I...","Go on my phone","Eat","Tidy up","Start a project I'll never finish"],
+["What am I like when I'm ill?","Carry on as normal","Quiet and sleepy","Need looking after","Writing my will"]]},
+{name:"Food",qs:[
+["My go-to takeaway?","Chinese","Indian","Pizza","Nando's, obviously"],
+["My coffee shop order?","Latte","Iced anything","Hot chocolate","Just a pastry"],
+["My Nando's spice level?","Lemon & herb","Medium","Hot","Extra hot, then I suffer"],
+["What could I eat every day?","Pasta","Rice","Burgers","Crisps"],
+["My crisp flavour?","Salt & vinegar","Cheese & onion","Ready salted","Whatever's in your bag"],
+["How do I like my eggs?","Scrambled","Fried","Poached","I don't eat eggs"],
+["My ideal breakfast?","Full English","Pancakes","Toast","Coffee is breakfast"],
+["My Sunday roast must-have?","Yorkshire puddings","Roast potatoes","Loads of gravy","Pigs in blankets"],
+["My chocolate bar?","Dairy Milk","Galaxy","Kinder Bueno","Whichever one you're eating"],
+["My pizza topping?","Pepperoni","Margherita","Pineapple, fight me","BBQ chicken"],
+["What do I order at a restaurant?","The same thing every time","Something new","Whatever you're having","I panic when the waiter comes"],
+["My McDonald's order?","Big Mac","Nuggets","A wrap","Just your chips"],
+["My fizzy drink?","Coke","Diet Coke","Fanta","Sparkling water, I'm an adult"],
+["My drink on a night out?","Wine","Cocktails","Beer","Soft drink, I'm driving"],
+["My midnight snack?","Chocolate","Crisps","Toast","Cereal"],
+["What can I actually cook?","Pasta","Curry","Beans on toast","Nothing, I order in"],
+["How do I take my tea?","Milky","Strong","With sugar","I don't drink tea"],
+["My favourite dessert?","Cheesecake","Brownie","Ice cream","Sticky toffee pudding"],
+["Food I'd never eat?","Mushrooms","Olives","Seafood","Coriander"],
+["My meal deal main?","Chicken sandwich","Wrap","Pasta pot","Sushi"]]},
+{name:"Taste",qs:[
+["My favourite type of film?","Rom-com","Horror","Action","True crime docs I shouldn't watch before bed"],
+["My comfort show?","Friends","The Office","Love Island","Gavin & Stacey"],
+["My dream holiday?","Beach","City break","Cosy cabin","All-inclusive, zero plans"],
+["My karaoke pick?","Pop anthem","Ballad","Rap","I'm not singing"],
+["My Spotify Wrapped top genre?","Pop","R&B","Hip hop","Musicals, embarrassingly"],
+["What would I binge in one night?","Crime drama","Reality TV","Anime","Old YouTube videos"],
+["My dream car?","Range Rover","Tesla","Mini","Whatever gets me there"],
+["Where would I live if I could?","London","By the sea","Abroad","Next door to my mum"],
+["The app I'm on most?","TikTok","Instagram","WhatsApp","Online shopping"],
+["My dream date?","Fancy dinner","Picnic","Cinema","Takeaway on the sofa"],
+["My celebrity crush type?","Musician","Actor","Footballer","Reality TV star"],
+["The book I'd pick up?","Romance","Thriller","Self-help","I don't read"],
+["My favourite season?","Spring","Summer","Autumn","Christmas (it counts)"],
+["The gig I'd go to?","Pop star","R&B","Rock band","A festival, for the vibes"],
+["What would I do with a free £1,000?","Holiday","Clothes","Tech","Food, honestly"],
+["My Christmas film?","Home Alone","Elf","Love Actually","The Grinch"],
+["My game night pick?","Monopoly","Uno","Cards Against Humanity","I don't play because I lose"],
+["My style?","Comfy","Smart","Sporty","Whatever's clean"],
+["What colour would I paint our bedroom?","White","Grey","Green","Something you'd hate"],
+["What would I be famous for?","Singing","Cooking","Being dramatic","Winning arguments"]]},
+{name:"CoupleIn",app:true,qs:[
+["What's at the top of my wishlist right now?","Something to wear","A trip","Tech","Food, obviously","wishlist"],
+["What mood am I in right now?","Happy","Tired","Hungry","Plotting something","mood"],
+["What would I want for our anniversary?","Dinner out","A weekend away","Something handmade","Just for you to remember it","calendar"],
+["What's my love language?","Words of affirmation","Quality time","Physical touch","Acts of service (do the bins)","lovelang"],
+["After a fight, what do I actually need?","Space","A hug","An apology","Food","conflict"],
+["How do I say sorry?","I say it","I buy you something","I act like nothing happened","I make your favourite food","conflict"],
+["Which gesture wins you the most brownie points with me?","Flowers","Cooking dinner","A random \"thinking of you\" text","A chore I didn't ask for","gestures"],
+["What do I do when I'm stressed?","Go quiet","Clean everything","Snap at you","Eat","mood"],
+["What date do I keep hinting at?","A fancy dinner","A weekend away","A cosy night in","Somewhere I saw on TikTok","calendar"],
+["What's my attachment style?","Secure","Anxious","Avoidant","\"Reply in 5 minutes or I panic\"","attach"],
+["What small thing makes my whole day?","A good morning text","A cup of tea brought to me","A compliment","You remembering what I said","gestures"],
+["What do I want more of from you?","Compliments","Date nights","Help around the house","Snacks","gestures"],
+["How do I want cheering up after a bad day?","Talk it through","Takeaway, no questions","A cuddle and a film","Leave me alone for an hour","mood"],
+["What do you always forget that I've told you?","My plans","Our plans","My friends' names","Literally everything","calendar"],
+["What do we argue about most?","Chores","Money","Being late","What to eat","conflict"],
+["The gift I'd secretly love?","Jewellery","An experience","Something personalised","An uninterrupted nap","wishlist"],
+["What would make me feel appreciated this week?","A thank you","A surprise","You planning a date","You doing the washing up","gestures"],
+["How do I act when I'm upset with you?","Tell you straight away","Go quiet","Say \"I'm fine\"","Get very, very polite","conflict"],
+["My ideal date night?","Dinner out","Cinema","Cooking together","Something we've never done","calendar"],
+["What do I need to hear more?","\"I love you\"","\"I'm proud of you\"","\"You were right\"","\"I've booked dinner\"","gestures"]]},
+{name:"Finale",spicy:true,qs:[
+["What do I actually say about you to my friends?","\"Perfect\"","\"So annoying\"","\"Lucky to have me\"","I tell them everything 😬"],
+["Which of your habits annoys me most?","Snoring","Phone at dinner","Clothes on the floor","Breathing"],
+["What would I rate your cooking?","10","7","4","We order in for a reason"],
+["What did I notice first about you?","Smile","Eyes","Outfit","Your confidence (a bit much)"],
+["What do I secretly want as a gift from you?","Flowers","Food","Something handmade","Money, honestly"],
+["Who do I think is the better driver?","Me","You","Neither","We don't talk about it"],
+["What do I do when you fall asleep first?","Watch the next episode without you","Eat your snacks","Steal the duvet","Stare at you (romantic, not weird)"],
+["Who do I think is funnier?","Me","You","Equal","You think you are"],
+["How fast did I text back at the start?","Instantly","5 minutes, playing it cool","Hours","You texted first, remember"],
+["What would I change about you?","Nothing","Your music taste","Your timekeeping","Your snoring"],
+["Your most annoying phrase, according to me?","\"I'm nearly ready\"","\"Calm down\"","\"I don't mind, you pick\"","\"What's for dinner?\""],
+["On a game show, you'd be...","The brains","The looks","The comic relief","The one who loses us the money"],
+["What do I do when you're away for a night?","Miss you","Starfish the whole bed","Eat junk","Call my mum for 3 hours"],
+["What did I think on our first date?","Instantly into you","Wasn't sure","Thought you were funny","Just came for the food"],
+["Who wins our arguments?","Me","You","Depends","Me, but you won't admit it"],
+["Who's the bigger baby when ill?","Me","You","Both","You. Always you."],
+["What did I first tell my mum about you?","Good-looking","Kind","Funny","Nothing, I kept you secret for a month"],
+["Who hogs the duvet?","Me","You","Both","Neither, the duvet is mine"],
+["Where would I rather be right now?","With you","Asleep","On holiday","With food"],
+["Whose side do my friends take?","Mine","Yours","Whoever's buying","They're scared of you"]]}
+];
+const RESERVE={name:"Habits",qs:[
+["What makes me grumpy fastest?","Being hungry","Slow walkers","Loud chewing","You saying \"calm down\""],
+["My worst habit?","Phone in bed","Cups everywhere","Always late","\"5 more minutes\""],
+["My 2am guilty pleasure?","Reality TV","Online shopping","Snacks","Checking my ex's new partner"],
+["What would I grab first in a fire?","My phone","My charger","My passport","Snacks"],
+["My biggest ick?","Bad texting","Being rude to waiters","Loud chewing","Socks with sliders"],
+["What am I most dramatic about?","Being cold","Being tired","A tiny paper cut","Everything"],
+["Who do I call first with gossip?","My best friend","My mum","The group chat","You, obviously"],
+["How do I argue?","Calm and logical","Loud","Silent treatment","Bring up things from 2019"],
+["What would I be on Love Island?","The villain","The sweetheart","The comedian","Dumped on day 2"],
+["How competitive am I?","Not at all","A bit","Very","I've flipped a board before"],
+["What scares me most?","Spiders","Heights","The dark","Answering the phone"],
+["What do I spend too much on?","Clothes","Food","Skincare","Subscriptions I forgot about"],
+["In a zombie apocalypse, I'm...","The leader","The cook","The first to go","Hiding with the snacks"],
+["My hidden talent?","Singing","Dancing","Remembering everything you've said","Falling asleep anywhere"],
+["How do I react to a surprise?","Cry","Scream","Act cool","I already knew"],
+["My secret dream job?","Actor","Chef","Interior designer","Getting paid to nap"],
+["My road trip role?","Driver","DJ","Snack manager","Asleep"],
+["How long can I keep a secret?","Forever","A week","A day","I've already told someone"],
+["What am I like after a few drinks?","Emotional","Hungry","On the dance floor","Asleep"],
+["What do I pretend to understand?","Football","Money","Politics","Wine"]]};
+const STAKES=["ice cream 🍦","breakfast in bed","the next date","a month of you picking the film","a week of doing the dishes","a 10-minute foot rub","a video saying \"you were right\"","a takeaway of your choice","a week of driving everywhere","a week of no phones at dinner","a homemade dinner","a massage","a cinema trip","flowers 💐","a week of morning coffees","a month of bin duty","a handwritten love letter","a Nando's","a whole day of you being right","a surprise date"];
+const CAPTIONS=["be honest 😭 how did yours do?","tag them. no excuses.","loser pays. we don't make the rules.","the comments are about to be a crime scene"];
+const PIN="Losers always \"forget\" what they owe 👀 Log it in CoupleIn so they can't get out of it. Link in bio";
+const ENDLINE="They'll \"forget\". Log it in CoupleIn.";
+const FEATURE={
+ wishlist:"got the wishlist one wrong? that's what the CoupleIn wishlist is for 👀",
+ mood:"guessed my mood wrong? CoupleIn mood sync exists for a reason",
+ calendar:"they WILL forget. CoupleIn won't. 📅",
+ conflict:"fights sorted in 5 minutes. CoupleIn, link in bio",
+ gestures:"every gesture counts. literally. brownie points on CoupleIn",
+ lovelang:"stop guessing. free love language quiz on CoupleIn, link in bio",
+ attach:"stop guessing. free attachment style quiz on CoupleIn, link in bio"};
+const START=new Date(2026,8,24);
+const L="ABCD";
+
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const permCache={};
+function perm(seed){if(permCache[seed])return permCache[seed];const r=rng(seed),a=[...Array(20).keys()];for(let i=19;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return permCache[seed]=a}
+function episode(e){
+  const c=Math.floor(e/20),p=e%20;
+  const qs=SLOTS.map((s,si)=>({slot:s.name,spicy:!!s.spicy,app:!!s.app,q:s.qs[perm(1000*(si+1)+c)[p]]}));
+  const sp=perm(9000+c).slice();if(c===0){const k=sp.indexOf(0);[sp[0],sp[k]]=[sp[k],sp[0]]}const stake=STAKES[sp[p]];
+  const app=qs.find(x=>x.app);return{n:e+1,qs,stake,caption:CAPTIONS[e%4],feature:app?FEATURE[app.q[5]]:""};
+}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function asText(ep){
+  let t=`YOU OWE ME #${ep.n}\n\nHOOK: Tag your partner. Under 4/5 = they owe you ${ep.stake}\nRULE: All questions are about ME. Comment your letters.\n\n`;
+  ep.qs.forEach((x,i)=>{t+=`${i+1}. ${x.spicy?"🌶️ ":""}${x.q[0]}\n`;for(let k=0;k<4;k++)t+=`   ${L[k]}) ${x.q[k+1]}\n`;t+="\n"});
+  t+=`END CARD: Comment your letters 👇 e.g. B D A C A. They mark you. Loser pays ${ep.stake}. ${ENDLINE}\nCAPTION: ${ep.caption} ${ep.feature}\nPINNED COMMENT: ${PIN}`;
+  return t;
+}
+function render(ep,slotLabel){
+  const qs=ep.qs.map((x,i)=>`<li class="q${x.spicy?" spicy":""}"><div class="qt"><span class="qn">${i+1}</span><span>${x.spicy?"🌶️ ":""}${x.app?"💗 ":""}${esc(x.q[0])}</span></div><div class="slot">${x.slot}</div><div class="opts">${[1,2,3,4].map(k=>`<div class="opt${k===4?" d":""}"><i>${L[k-1]}</i>${esc(x.q[k])}</div>`).join("")}</div></li>`).join("");
+  return `<article class="ep"><div class="ephead"><span class="num">${slotLabel} · You Owe Me #${ep.n}</span><span class="stake">Forfeit: ${esc(ep.stake)}</span></div>
+  <div class="hook">Tag your partner. Under 4/5 = they owe you <b>${esc(ep.stake)}</b></div>
+  <div class="rule">All questions are about ME. Comment your letters.</div>
+  <ol class="qs">${qs}</ol>
+  <dl class="meta" style="margin:0"><div><dt>End card</dt><dd style="margin:0">Comment your letters 👇 e.g. B D A C A. They mark you. Loser pays ${esc(ep.stake)}. <strong>${esc(ENDLINE)}</strong></dd></div>
+  <div><dt>Caption</dt><dd style="margin:0">${esc(ep.caption)} ${esc(ep.feature)}</dd></div>
+  <div><dt>Pin</dt><dd style="margin:0">${esc(PIN)}</dd></div></dl>
+  <button class="copy" data-n="${ep.n-1}">Copy episode</button></article>`;
+}
+const dayEl=document.getElementById("day");
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dayIndex(d){return Math.max(0,Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-START)/864e5))}
+let cur=new Date();if(cur<START)cur=new Date(START);
+function show(){
+  dayEl.value=iso(cur);const d=dayIndex(cur);
+  document.getElementById("eps").innerHTML=render(episode(2*d),"Morning")+render(episode(2*d+1),"Evening");
+}
+document.getElementById("prev").onclick=()=>{const n=new Date(cur);n.setDate(n.getDate()-1);if(n>=START){cur=n;show()}};
+document.getElementById("next").onclick=()=>{cur.setDate(cur.getDate()+1);show()};
+document.getElementById("jump").onclick=()=>{cur=new Date();if(cur<START)cur=new Date(START);show()};
+dayEl.onchange=()=>{if(!dayEl.value)return;const [y,m,dd]=dayEl.value.split("-").map(Number);const n=new Date(y,m-1,dd);cur=n<START?new Date(START):n;show()};
+document.getElementById("eps").addEventListener("click",e=>{
+  const b=e.target.closest(".copy");if(!b)return;const txt=asText(episode(+b.dataset.n));
+  const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy episode",1500)};
+  try{navigator.clipboard.writeText(txt).then(done,()=>fallback(txt,b))}catch(_){fallback(txt,b)}
+});
+function fallback(txt,b){const ta=document.createElement("textarea");ta.value=txt;ta.style.width="100%";ta.rows=10;ta.readOnly=true;b.replaceWith(ta);ta.select()}
+const tabs=document.getElementById("tabs"),bank=document.getElementById("bank");
+function showBank(i){[...tabs.children].forEach((t,j)=>t.setAttribute("aria-selected",i===j));
+  bank.innerHTML=BANKS[i].qs.map(q=>`<div class="bq"><strong>${BANKS[i].spicy?"🌶️ ":""}${BANKS[i].app?"💗 ":""}${esc(q[0])}</strong><span>${q.slice(1,5).map((o,k)=>L[k]+") "+esc(o)).join(" · ")}</span></div>`).join("")}
+const BANKS=[...SLOTS,{name:"Reserve: habits",qs:RESERVE.qs}];BANKS.forEach((s,i)=>{const b=document.createElement("button");b.setAttribute("role","tab");b.textContent=`${i<5?(i+1)+". ":""}${s.name} (${s.qs.length})`;b.onclick=()=>showBank(i);tabs.appendChild(b)});
+showBank(0);
+document.getElementById("stakes").innerHTML=STAKES.map(s=>`<span>${esc(s)}</span>`).join("");
+show();
+</script>
